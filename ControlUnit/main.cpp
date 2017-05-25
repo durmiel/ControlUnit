@@ -1,10 +1,11 @@
-#include "ControlUnit.h"
-#include <QtWidgets/QApplication>
+#include "guicontrolunit.h"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	ControlUnit w;
-	w.show();
-	return a.exec();
+  QApplication a(argc, argv);
+  GuiControlUnit w;
+  w.show();
+
+  return a.exec();
 }
