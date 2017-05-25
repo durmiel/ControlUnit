@@ -14,7 +14,7 @@ public:
 public slots:
 	void set_status_connected();
 	void set_status_disconnected();
-	//void display_error(QAbstractSocket::SocketError socket_error);
+	void display_error(QAbstractSocket::SocketError socket_error);
 
 private: 
 	QTcpSocket *m_socket;

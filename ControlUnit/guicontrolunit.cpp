@@ -5,13 +5,13 @@ GuiControlUnit::GuiControlUnit(QWidget *parent) : QMainWindow(parent), ui(new Ui
 	ui->setupUi(this);
 
 	// Create the state machine and its states
+	m_network_manager = new NetworkManager(this);
 	m_machine = new QStateMachine(this);
 	m_idle = new IdleState(m_machine);
 	m_wait = new WaitState(m_machine);
 	m_shoot = new ShootTimeState(m_machine);
 	m_pretime = new PreparationTimeState(m_machine);
-	m_network_manager = new NetworkManager(this);
-
+	
 	m_idle->init();
 	m_wait->init();
 	m_pretime->init();
