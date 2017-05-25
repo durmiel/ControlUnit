@@ -12,7 +12,7 @@ class PreparationTimeState : public QState {
 	Q_OBJECT
 
 public:
-	explicit PreparationTimeState(QState *parent = 0);
+	explicit PreparationTimeState(QState *parent = 0, NetworkManager *manager = 0);
 	void init();
 	void set_preparation_time(int preparationTime);
 

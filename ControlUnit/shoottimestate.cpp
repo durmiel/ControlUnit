@@ -4,9 +4,10 @@
 #include <QDebug>
 #include <QEvent>
 
-ShootTimeState::ShootTimeState(QState *parent) : QState(parent) {
+ShootTimeState::ShootTimeState(QState *parent, NetworkManager *manager) : QState(parent) {
   setObjectName("ShootTimeState");
   m_timer = new QTimer(this);
+  m_network_manager = manager;
 }
 
 void ShootTimeState::init() {
@@ -31,6 +32,7 @@ void ShootTimeState::timerEvent() {
 	set_shoot_time(--m_shoot_time);
 	if (m_shoot_time == 0) {
 		m_timer->stop();
+		m_network_manager->send_command("turn away");
 		this->machine()->postEvent(new StringEvent("Timeout"));
 	}
 }

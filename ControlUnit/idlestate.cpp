@@ -4,9 +4,10 @@
 #include <QEvent>
 #include <QPushButton>
 
-IdleState::IdleState(QState *parent) : QState(parent)
+IdleState::IdleState(QState *parent, NetworkManager *manager) : QState(parent)
 {
   setObjectName("IdleState");
+  m_network_manager = manager;
 }
 
 void IdleState::init() {
@@ -24,6 +25,7 @@ void IdleState::init() {
 void IdleState::onEntry(QEvent *event)
 {
   qDebug() << objectName() << " onEntry";
+  m_network_manager->send_command("turn out");
   
   m_button_runs->unblock();
   m_button_preparation_time->unblock();
@@ -33,6 +35,7 @@ void IdleState::onEntry(QEvent *event)
 void IdleState::onExit(QEvent *event)
 {
   qDebug() << objectName() << " onExit";
+  m_network_manager->send_command("turn away");
 
   m_button_runs->reblock();
   m_button_preparation_time->reblock();

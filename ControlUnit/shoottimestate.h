@@ -6,12 +6,13 @@
 #include <QTimer>
 #include <QPushButton>
 #include "StringTransition.h"
+#include "NetworkManager.h"
 
 class ShootTimeState : public QState {
 	Q_OBJECT
 
 public:
-	explicit ShootTimeState(QState *parent = 0);
+	explicit ShootTimeState(QState *parent = 0, NetworkManager *manager = 0);
 	void init();
 	void set_shoot_time(int shoot_time);
 
@@ -30,6 +31,7 @@ private:
   QPushButton *m_shoot_time_button;
   QPushButton *m_delete_button;
   StringTransition *m_transition;
+  NetworkManager *m_network_manager;
 };
 
 #endif // SHOOTTIMESTATE_H

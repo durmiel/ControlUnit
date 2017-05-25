@@ -3,11 +3,11 @@
 
 #include <QState>
 #include <QSignalBlocker>
+#include "NetworkManager.h"
 
-class IdleState : public QState
-{
+class IdleState : public QState {
 public:
-  IdleState(QState *parent = 0);
+  IdleState(QState *parent = 0, NetworkManager *manager = 0);
   void init();
 
 protected:
@@ -19,6 +19,7 @@ private:
   QSignalBlocker *m_button_runs;
   QSignalBlocker *m_button_preparation_time;
   QSignalBlocker *m_button_shoot_time;
+  NetworkManager *m_network_manager;
 };
 
 #endif // IDLESTATE_H

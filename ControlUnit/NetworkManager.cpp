@@ -11,11 +11,13 @@ NetworkManager::NetworkManager(QObject *parent) : QObject(parent) {
 }
 
 NetworkManager::~NetworkManager() {
+	m_socket->close();
 	delete m_socket;
 }
 
 void NetworkManager::send_command(const QString &message) {
-	qDebug() << message << endl;
+	//qDebug() << message << endl;
+	m_socket->write(message.toUtf8());
 }
 
 void NetworkManager::set_status_connected() {

@@ -5,10 +5,11 @@
 #include <QState>
 #include <QEvent>
 
-PreparationTimeState::PreparationTimeState(QState *parent) : QState(parent)
+PreparationTimeState::PreparationTimeState(QState *parent, NetworkManager *manager) : QState(parent)
 {
   setObjectName("PreparationTimeState");
   m_timer = new QTimer(this);
+  m_network_manager = manager;
 }
 
 void PreparationTimeState::init() {
@@ -34,6 +35,7 @@ void PreparationTimeState::timerEvent() {
 	set_preparation_time(--m_preparation_time);
 	if (m_preparation_time == 0) {
 		m_timer->stop();
+		m_network_manager->send_command("turn out");
 		this->machine()->postEvent(new StringEvent("Timeout"));
 	}
 }
@@ -50,6 +52,7 @@ void PreparationTimeState::onEntry(QEvent *event)
 void PreparationTimeState::onExit(QEvent *event)
 {
   qDebug() << objectName() << " onExit";
+
   set_preparation_time(m_displayed_time);
   m_timer->stop();
 }
