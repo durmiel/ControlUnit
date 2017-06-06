@@ -32,7 +32,7 @@ void ShootTimeState::timerEvent() {
 	set_shoot_time(--m_shoot_time);
 	if (m_shoot_time == 0) {
 		m_timer->stop();
-		m_network_manager->send_command("turn away");
+		m_network_manager->send_command("away");
 		this->machine()->postEvent(new StringEvent("Timeout"));
 	}
 }

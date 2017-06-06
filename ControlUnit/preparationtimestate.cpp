@@ -35,7 +35,7 @@ void PreparationTimeState::timerEvent() {
 	set_preparation_time(--m_preparation_time);
 	if (m_preparation_time == 0) {
 		m_timer->stop();
-		m_network_manager->send_command("turn out");
+		m_network_manager->send_command("out");
 		this->machine()->postEvent(new StringEvent("Timeout"));
 	}
 }

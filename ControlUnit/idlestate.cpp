@@ -25,7 +25,7 @@ void IdleState::init() {
 void IdleState::onEntry(QEvent *event)
 {
   qDebug() << objectName() << " onEntry";
-  m_network_manager->send_command("turn out");
+  m_network_manager->send_command("out");
   
   m_button_runs->unblock();
   m_button_preparation_time->unblock();
@@ -35,7 +35,7 @@ void IdleState::onEntry(QEvent *event)
 void IdleState::onExit(QEvent *event)
 {
   qDebug() << objectName() << " onExit";
-  m_network_manager->send_command("turn away");
+  m_network_manager->send_command("away");
 
   m_button_runs->reblock();
   m_button_preparation_time->reblock();

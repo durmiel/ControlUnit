@@ -7,7 +7,7 @@ NetworkManager::NetworkManager(QObject *parent) : QObject(parent) {
 	connect(m_socket, SIGNAL(connected()), this, SLOT(set_status_connected()));
 	connect(m_socket, SIGNAL(disconnected()), this, SLOT(set_status_disconnected()));
 	connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(display_error(QAbstractSocket::SocketError)));
-	m_socket->connectToHost("127.0.0.1", 8888);
+	m_socket->connectToHost("192.168.4.1", 6666);
 }
 
 NetworkManager::~NetworkManager() {
@@ -25,7 +25,12 @@ void NetworkManager::set_status_connected() {
 }
 
 void NetworkManager::set_status_disconnected() {
-	m_connection_label->setText("Disconnected");
+	try {
+		m_connection_label->setText("Disconnected");
+	}
+	catch (const std::exception&) {
+
+	}
 }
 
 void NetworkManager::display_error(QAbstractSocket::SocketError socket_error) {
