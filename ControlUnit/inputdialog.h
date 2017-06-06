@@ -21,6 +21,7 @@ signals:
 
 private slots:
   void set_number();
+  void delete_number();
   void check_user_input();
 
 private:

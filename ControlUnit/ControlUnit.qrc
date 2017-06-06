@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="ControlUnit">
-    </qresource>
+  <qresource prefix="ControlUnit">
+    <file>pfeil.png</file>
+  </qresource>
 </RCC>

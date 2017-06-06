@@ -25,6 +25,7 @@ InputDialog::InputDialog(QWidget *parent) :
   connect(ui->b_9, SIGNAL(clicked()), this, SLOT(set_number()));
   connect(ui->b_ok, SIGNAL(clicked()), this, SLOT(check_user_input()));
   connect(ui->b_cancel, SIGNAL(clicked()), this, SLOT(close()));
+  connect(ui->b_del, SIGNAL(clicked()), this, SLOT(delete_number()));
   ui->l_number->setText("");
 }
 
@@ -86,6 +87,20 @@ void InputDialog::set_number()
     break;
   }
   ui->l_number->setText(number);
+}
+
+void InputDialog::delete_number() {
+	QString text;
+
+	text = ui->l_number->text();
+	if (text.length() == 1) {
+		ui->l_number->setText("0");
+	}
+	else {
+		if (text.length() > 1) {
+			ui->l_number->setText(text.mid(0, text.length() - 1));
+		}
+	}
 }
 
 void InputDialog::check_user_input()
