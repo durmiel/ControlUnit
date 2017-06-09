@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QLabel>
 #include <QtNetwork\QTcpSocket>
+#include <QTimer>
 
 class NetworkManager : public QObject {
 	Q_OBJECT
@@ -15,8 +16,10 @@ public slots:
 	void set_status_connected();
 	void set_status_disconnected();
 	void display_error(QAbstractSocket::SocketError socket_error);
+	void timerEvent();
 
 private: 
+	QTimer* m_timer;
 	QTcpSocket *m_socket;
 	QLabel* m_connection_label;
 };
