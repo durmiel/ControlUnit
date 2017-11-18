@@ -21,6 +21,9 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="b_start">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -106,7 +109,7 @@
      <rect>
       <x>50</x>
       <y>440</y>
-      <width>81</width>
+      <width>101</width>
       <height>16</height>
      </rect>
     </property>

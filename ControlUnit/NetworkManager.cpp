@@ -5,6 +5,7 @@ NetworkManager::NetworkManager(QObject *parent) : QObject(parent) {
 	m_socket = new QTcpSocket();
 	m_timer = new QTimer(this);
 	m_connection_label = this->parent()->findChild<QLabel*>("l_connection");
+	m_start = this->parent()->findChild<QPushButton*>("b_start");
 
 	connect(m_socket, SIGNAL(connected()), this, SLOT(set_status_connected()));
 	connect(m_socket, SIGNAL(disconnected()), this, SLOT(set_status_disconnected()));
@@ -26,13 +27,15 @@ void NetworkManager::send_command(const QString &message) {
 
 void NetworkManager::set_status_connected() {
 	m_connection_label->setText("Connected");
+	m_start->setEnabled(true);
 }
 
 void NetworkManager::set_status_disconnected() {
-	m_socket->connectToHost(QHostAddress::LocalHost, 8888);
+	m_socket->connectToHost("127.0.0.1", 8888);
 	m_timer->start(1000);
 	try {
 		m_connection_label->setText("Disconnected");
+		m_start->setEnabled(false);
 	}
 	catch (const std::exception&) {
 
@@ -45,7 +48,16 @@ void NetworkManager::display_error(QAbstractSocket::SocketError socket_error) {
 
 void NetworkManager::timerEvent() {
 	if (m_socket->state() != QAbstractSocket::SocketState::ConnectedState) {
-		m_socket->connectToHost(QHostAddress::LocalHost, 8888);
+		m_socket->connectToHost("127.0.0.1", 8888);
 		m_timer->start(1000);
+	}
+}
+
+bool NetworkManager::isConnected() {
+	if (m_socket->state() == QAbstractSocket::SocketState::ConnectedState) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }

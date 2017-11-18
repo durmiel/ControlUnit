@@ -5,8 +5,7 @@
 #include <QState>
 #include <QEvent>
 
-PreparationTimeState::PreparationTimeState(QState *parent, NetworkManager *manager) : QState(parent)
-{
+PreparationTimeState::PreparationTimeState(QState *parent, NetworkManager *manager) : QState(parent) {
   setObjectName("PreparationTimeState");
   m_timer = new QTimer(this);
   m_network_manager = manager;
