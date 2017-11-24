@@ -5,6 +5,7 @@
 #include <QtNetwork\QTcpSocket>
 #include <QTimer>
 #include <QPushButton>
+#include <QtXml>
 
 class NetworkManager : public QObject {
 	Q_OBJECT
@@ -21,6 +22,10 @@ public slots:
 	bool isConnected();
 
 private: 
+	void read_configuration();
+
+	QString m_config_path = "C:/Users/norbe/OneDrive/Projekte/QXml/x64/Debug/config.xml";
+	QString m_ip;
 	QTimer* m_timer;
 	QTcpSocket *m_socket;
 	QLabel* m_connection_label;
